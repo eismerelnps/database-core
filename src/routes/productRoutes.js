@@ -1,10 +1,7 @@
 // routes/productRoutes.js
 
-const { body } = require('express-validator');
-const { createProductValidators } = require('../validators/productValidators');
-
-
 const express = require('express');
+const { createProductValidators } = require('../validators/productValidators');
 const productController = require('../controllers/productController');
 
 const router = express.Router();
