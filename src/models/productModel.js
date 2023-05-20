@@ -1,4 +1,4 @@
-// models/Product.js
+// models/productModel.js
 
 const mongoose = require('mongoose');
 
@@ -7,7 +7,15 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  model: {
+    type: String,
+    required: true,
+  },
   category: {
+    type: String,
+    required: true,
+  },
+  currency: {
     type: String,
     required: true,
   },

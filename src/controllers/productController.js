@@ -46,12 +46,14 @@ exports.getProductById = async (req, res) => {
 exports.createProduct = async (req, res) => {
   try {
     // Obtén los datos del producto desde el cuerpo de la solicitud
-    const { name, category, price, offerPrice, stocked, inOffer, image, description } = req.body;
+    const { name, model, category, currency, price, offerPrice, stocked, inOffer, image, description } = req.body;
 
     // Crea una nueva instancia del modelo Product con los datos del producto
     const newProduct = new Product({
       name,
+      model,
       category,
+      currency,
       price,
       offerPrice,
       stocked,
@@ -86,6 +88,10 @@ exports.updateProductById = async (req, res) => {
     res.status(500).json({ message: 'Error al actualizar el producto', error });
   }
 };
+
+
+
+
 
 // Controlador para eliminar un producto por su ID
 exports.deleteProductById = async (req, res) => {
