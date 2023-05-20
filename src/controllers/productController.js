@@ -2,6 +2,24 @@
 
 // Importa el modelo de productos
 const Product = require('../models/productModel');
+//Importa el paquete express-validator
+const { validationResult } = require('express-validator');
+
+
+// Lista de validadores para el cuerpo de la solicitud
+const createProductValidators = [
+  body('name').notEmpty().withMessage('El nombre del producto es obligatorio'),
+  body('model').notEmpty().withMessage('El modelo del producto es obligatorio'),
+  body('category').notEmpty().withMessage('La categoría del producto es obligatoria'),
+  body('currency').notEmpty().withMessage('La moneda del producto es obligatoria'),
+  body('price').notEmpty().withMessage('El precio del producto es obligatorio'),
+  body('image').notEmpty().withMessage('La imagen del producto es obligatoria'),
+  body('description').notEmpty().withMessage('La descripción del producto es obligatoria'),
+];
+
+
+
+
 
 // const Product = require('../models/Product');
 
@@ -42,9 +60,20 @@ exports.getProductById = async (req, res) => {
 // Importa el modelo de productos
   //const Product = require('../models/Product');
 
+
+
+
+
+
 // Controlador para crear un nuevo producto
 exports.createProduct = async (req, res) => {
   try {
+    // Verificar errores de validación
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
     // Obtén los datos del producto desde el cuerpo de la solicitud
     const { name, model, category, currency, price, offerPrice, stocked, inOffer, image, description } = req.body;
 
@@ -72,6 +101,7 @@ exports.createProduct = async (req, res) => {
     res.status(500).json({ message: 'Error al crear el producto', error });
   }
 };
+
 
 
 

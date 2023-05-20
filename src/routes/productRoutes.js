@@ -1,5 +1,9 @@
 // routes/productRoutes.js
 
+const { body } = require('express-validator');
+const { createProductValidators } = require('../validators/productValidators');
+
+
 const express = require('express');
 const productController = require('../controllers/productController');
 
@@ -12,7 +16,7 @@ router.get('/', productController.getAllProducts);
 router.get('/:id', productController.getProductById);
 
 // Ruta para crear un nuevo producto
-router.post('/', productController.createProduct);
+router.post('/', createProductValidators, productController.createProduct);
 
 // Ruta para actualizar un producto por su ID
 router.put('/:id', productController.updateProductById);
