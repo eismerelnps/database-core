@@ -4,7 +4,6 @@
 const express = require('express');
 const { dbConnect } = require('./database/config');
 
-const authController = require('./controllers/authController');
 const productRouter = require('./routes/productRoutes');
 const userRouter = require('./routes/userRoutes');
 
@@ -14,10 +13,10 @@ const app = express();
 app.use(express.json());
 
 
-app.use('/api/v1/users', userRouter);
+
 
 //authentication route
-app.use('/api/v1/login', userRouter);
+app.use('/api/v1/users', userRouter);
 
 // Rutas protegidas que requieren autenticación
 app.use('/api/v1/products', productRouter);
