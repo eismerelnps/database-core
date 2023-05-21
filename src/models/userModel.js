@@ -15,6 +15,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: false, // Campo opcional
   },
+  role: {
+    type: String,
+    default: 'user',
+  }
 });
 
 // Creación del modelo User basado en el esquema

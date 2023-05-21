@@ -3,7 +3,7 @@
 const express = require('express');
 const { createProductValidators } = require('../validators/productValidators');
 const productController = require('../controllers/productController');
-const userController = require('../controllers/userController');
+const middleware = require('../middleware/middleware');
 
 
 const router = express.Router();
@@ -12,15 +12,15 @@ const router = express.Router();
 router.get('/', productController.getAllProducts);
 
 // Ruta para obtener un producto por su ID
-router.get('/:id', userController.authenticate, productController.getProductById);
+router.get('/:id', middleware.authenticate, middleware.checkPermissions(['admin', 'superadmin']), productController.getProductById);
 
 // Ruta para crear un nuevo producto
-router.post('/', userController.authenticate, createProductValidators, productController.createProduct);
+router.post('/', middleware.authenticate, middleware.checkPermissions(['create', 'read', 'update', 'delete']), createProductValidators, productController.createProduct);
 
 // Ruta para actualizar un producto por su ID
-router.put('/:id', productController.updateProductById);
+router.put('/:id', middleware.checkPermissions(['update']), productController.updateProductById);
 
 // Ruta para eliminar un producto por su ID
-router.delete('/:id', productController.deleteProductById);
+router.delete('/:id', middleware.checkPermissions(['delete']), productController.deleteProductById);
 
 module.exports = router;
