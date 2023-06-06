@@ -1,0 +1,7 @@
+{
+    "version": 2,
+    "name": "segurtec-backend",
+    "buildCommand": "docker build -t $segurtec-backend\\ .",
+    "startCommand": "docker run -p $RAILWAY_PORT:$3000 $segurtec-backend"
+  }
+  
