@@ -12,7 +12,7 @@ const router = express.Router();
 router.get('/', productController.getAllProducts);
 
 // Ruta para obtener un producto por su ID
-router.get('/:id', middleware.authenticate, middleware.checkPermissions(['admin', 'superadmin']), productController.getProductById);
+router.get('/:id', middleware.authenticate, productController.getProductById);
 
 // Ruta para crear un nuevo producto
 router.post('/', middleware.authenticate, middleware.checkPermissions(['create', 'read', 'update', 'delete']), createProductValidators, productController.createProduct);
